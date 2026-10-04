@@ -69,6 +69,22 @@ class ErrorBody(BaseModel):
     code: str
 
 
+class DocumentCitation(BaseModel):
+    """A citation for a document-backed answer."""
+
+    doc_id: str
+    quote: str
+
+
+class DocumentAnswerResponse(BaseModel):
+    """`GET /documents/answer` — answer a plain-language question with citations."""
+
+    answer: Optional[str]
+    citations: list[DocumentCitation]
+    reason: Optional[str] = None
+    model: Optional[ModelPayload] = None
+
+
 class SummaryResponse(BaseModel):
     """`GET /libraries/summary` — see specs/filtered-summary.md §5."""
 

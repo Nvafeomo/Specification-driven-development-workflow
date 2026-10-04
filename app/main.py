@@ -13,7 +13,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 
 from app.model_client import ModelError, ModelTimeout
-from app.routes import libraries, summary
+from app.routes import documents, libraries, summary
 
 app = FastAPI(
     title="Facilities API",
@@ -25,6 +25,7 @@ app = FastAPI(
 # Order matters: `/libraries/summary` must be registered before `/libraries/{library_id}`,
 # or the path-parameter route captures the literal path "summary" first.
 app.include_router(summary.router)
+app.include_router(documents.router)
 app.include_router(libraries.router)
 
 
